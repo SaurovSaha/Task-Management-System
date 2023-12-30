@@ -3,12 +3,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>Dashboard | @yield('title')</title>
+    <title>Task Management System | @yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{asset('/favicon.ico')}}" />
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{asset('css/style.css')}}" rel="stylesheet" />
     <script src="{{asset('js/axios.min.js')}}"></script>
     <script src="{{asset('js/config.js')}}"></script>
+
+
 </head>
 
 <body>
@@ -22,6 +24,7 @@
 <div>
     @yield('content')
 </div>
+
 <script>
 
 </script>

@@ -36,6 +36,10 @@ class ProjectController extends Controller
         return response()->json($project, Response::HTTP_CREATED);
     }
 
+    public function show(Project $project) {
+        return $project;
+    }
+
     public function update(Request $request, Project $project) {
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',

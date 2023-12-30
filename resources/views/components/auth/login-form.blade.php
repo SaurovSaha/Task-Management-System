@@ -34,7 +34,7 @@
 
         if(res.data['status']==="success"){
             alert(res.data['message']);
-            window.location.href="/Profile";
+            window.location.href="/dashboard";
         }else {
             alert(res.data['message'])
         }

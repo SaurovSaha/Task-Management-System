@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -14,13 +15,14 @@ class TaskController extends Controller
         $keyword = $request->keyword;
 
         $query = Task::query();
+        
         // return $query;
 
         if ($keyword) {
             $query = $query->where('taskName', 'like', '%' . $keyword . '%');
         }
 
-        return $query->orderByDesc('id')->paginate($perPage)->withQueryString();
+        return $query->with('project', 'user')->orderByDesc('id')->paginate($perPage)->withQueryString();
     }
 
     public function store(Request $request){

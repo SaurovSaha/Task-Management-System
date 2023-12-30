@@ -49,7 +49,6 @@
         document.getElementById('email').value=res.data['email']
         document.getElementById('password').value=res.data['password']
 
-
     }
 
 </script>

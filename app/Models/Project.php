@@ -14,4 +14,9 @@ class Project extends Model
         'projectDeadline',
         'status',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

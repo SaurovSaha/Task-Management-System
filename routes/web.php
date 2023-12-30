@@ -17,6 +17,7 @@ use App\Http\Middleware\TokenVerificationMiddleware;
 |
 */
 
+
 Route::get('/', function () {
     return view('pages.auth.login-page');
 });
@@ -25,24 +26,26 @@ Route::get('/', function () {
 //page routes
 Route::view('/Registation', 'pages.auth.registration-page');
 Route::view('/Login', 'pages.auth.login-page');
-Route::view('/Profile', 'pages.dashboard.profile-page')->middleware([TokenVerificationMiddleware::class]);
 
+Route::view('/Profile', 'pages.dashboard.profile-page')->middleware([TokenVerificationMiddleware::class]);
+Route::view('/dashboard', 'pages.dashboard.dashboard')->middleware([TokenVerificationMiddleware::class]);
 
 
 //backend routes
-Route::post("/userRegistration", [UserController::class, 'userRegistation']);
 Route::post("/userLogin", [UserController::class, 'userLogin']);
 Route::get("/userProfile", [UserController::class, 'userProfile'])->middleware([TokenVerificationMiddleware::class]);
 Route::get("/userLogout", [UserController::class, 'userLogout'])->middleware([TokenVerificationMiddleware::class]);
 
+Route::view('/projects', 'pages.dashboard.projects-page')->middleware([TokenVerificationMiddleware::class]);
 Route::post("/projects", [ProjectController::class, 'store'])->middleware([TokenVerificationMiddleware::class]);
 Route::get('/projects/list', [ProjectController::class, 'index'])->name('projects.index')->middleware([TokenVerificationMiddleware::class]);
+Route::get("/projects/{project}", [ProjectController::class, 'show'])->name('projects.show')->middleware([TokenVerificationMiddleware::class]);
 Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update')->middleware([TokenVerificationMiddleware::class]);
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy')->middleware([TokenVerificationMiddleware::class]);
 
 // Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
-
+Route::view('/tasks', 'pages.dashboard.tasks-page')->middleware([TokenVerificationMiddleware::class]);
 Route::post("/tasks", [TaskController::class, 'store'])->middleware([TokenVerificationMiddleware::class]);
 Route::get("/tasks/list", [TaskController::class, 'index'])->name('tasks.index')->middleware([TokenVerificationMiddleware::class]);
 Route::put("/tasks/{task}", [TaskController::class, 'update'])->name('tasks.update')->middleware([TokenVerificationMiddleware::class]);
