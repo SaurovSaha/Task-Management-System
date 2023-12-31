@@ -17,7 +17,7 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Add Project</a>
+                        
                             <a class="nav-link" href="{{ url('/projects') }}">Project List</a>
                         </nav>
                     </div>
@@ -30,7 +30,7 @@
                     </a>
                     <div class="collapse" id="tasks" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Add Task</a>
+                            
                             <a class="nav-link" href="{{ url('/tasks') }}">Task List</a>
                         </nav>
                     </div>

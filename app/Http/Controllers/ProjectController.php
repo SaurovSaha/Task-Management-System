@@ -19,7 +19,7 @@ class ProjectController extends Controller
             $query = $query->where('projectName', 'like', '%' . $keyword . '%');
         }
 
-        return $query->orderByDesc('id')->paginate($perPage)->withQueryString();
+        return $query->with('user')->orderByDesc('id')->paginate($perPage)->withQueryString();
     }
 
 

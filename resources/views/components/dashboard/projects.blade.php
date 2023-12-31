@@ -107,7 +107,7 @@
             <td>${project.projectName}</td>
             <td>${project.projectDeadline}</td>
             <td>${project.status}</td>
-            <td>${project.user_id}</td>
+            <td>${project.user ? project.user.username : 'N/A'}</td>
             <td>
                 <button data-id="${project.id}" class="btn editBtn btn-sm btn-outline-success">Edit</button>
                 <button data-id="${project.id}" class="btn deleteBtn btn-sm btn-outline-danger">Delete</button>

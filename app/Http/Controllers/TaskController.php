@@ -39,6 +39,11 @@ class TaskController extends Controller
         return response()->json($task, Response::HTTP_CREATED);
     }
 
+
+    public function show(Task $task) {
+        return $task;
+    }
+
     public function update(Request $request, Task $task) {
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',

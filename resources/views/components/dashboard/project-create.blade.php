@@ -64,8 +64,8 @@
                 alert("Request failed!");
             }
         } catch (error) {
-            console.error('Error creating customer:', error);
-            alert("An error occurred while saving the customer.");
+            console.error('Error creating project:', error);
+            alert("An error occurred while saving the project.");
         } finally {
             hideLoader();
         }

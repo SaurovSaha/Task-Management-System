@@ -47,6 +47,25 @@ class UserController extends Controller
 
     }
 
+    public function update(Request $request) {
+        $userID = $request->header('id');
+        $userToUpdate = User::find($userID);
+    
+        if (!$userToUpdate) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+        $validated = $request->validate([
+            'username' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        $userToUpdate->update($validated);
+    
+        return response()->json($userToUpdate);
+    }
+    
+
 
     function userProfile(Request $request){
         $userID= $request->header('id');

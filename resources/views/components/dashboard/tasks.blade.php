@@ -5,7 +5,7 @@
         </div>
         <div class="align-customers-center col">
             <button data-bs-toggle="modal" data-bs-target="#create-modal" class="float-end btn  px-4 btn-success">Create
-                Project</button>
+                Task</button>
         </div>
     </div>
 </div>
@@ -171,13 +171,13 @@
         const target = event.target
 
         if (target.classList.contains('deleteBtn')) {
-            const projectID = target.getAttribute('data-id')
-            deleteproject(projectID)
+            const taskID = target.getAttribute('data-id')
+            deleteproject(taskID)
         }
 
         if (target.classList.contains('editBtn')) {
-            const projectID = target.getAttribute('data-id')
-            fillUpUpdateForm(projectID)
+            const taskID = target.getAttribute('data-id')
+            fillUpUpdateForm(taskID)
         }
     })
 
