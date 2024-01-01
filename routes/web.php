@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectDashboardController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -28,10 +29,14 @@ Route::view('/Registation', 'pages.auth.registration-page');
 Route::view('/Login', 'pages.auth.login-page');
 
 Route::view('/Profile', 'pages.dashboard.profile-page')->middleware([TokenVerificationMiddleware::class]);
-Route::view('/dashboard', 'pages.dashboard.dashboard')->middleware([TokenVerificationMiddleware::class]);
+
+
 
 
 //backend routes
+Route::view('/dashboard', 'pages.dashboard.dashboard')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/project/details', [ProjectDashboardController::class, 'index'])->middleware([TokenVerificationMiddleware::class]);
+
 Route::post("/userLogin", [UserController::class, 'userLogin']);
 Route::get("/userProfile", [UserController::class, 'userProfile'])->middleware([TokenVerificationMiddleware::class]);
 Route::put("/userProfile", [UserController::class, 'update'])->middleware([TokenVerificationMiddleware::class]);

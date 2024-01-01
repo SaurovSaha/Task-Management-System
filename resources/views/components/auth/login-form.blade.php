@@ -11,6 +11,9 @@
                     <br/>
                     <button  onclick="Save()"  class="btn w-100 btn-success btn-sm">Next</button>
                     <hr/>
+                    <button type="button" class="btn w-100 btn-outline-primary">
+                       <a href="{{ url('/Registation') }}">Create new user
+                    </a></button>
                 </div>
             </div>
         </div>

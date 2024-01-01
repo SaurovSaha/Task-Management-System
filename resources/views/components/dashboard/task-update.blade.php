@@ -13,7 +13,7 @@
                                 <input type="text" class="form-control" id="taskNameUpdate">
 
                                 <label class="form-label">Project Name *</label>
-                                <select type="text" class="form-control mb-2" id="taskProjectNameUpdate" onfocus="fetchProjectNames()">
+                                <select type="text" class="form-control mb-2" id="taskProjectNameUpdate" onfocus="fetchProjectNamesUpdate()">
                                     <option value="">Select project name</option>
                                 </select>
                                 
@@ -47,21 +47,21 @@
 <script>
 
 
-    async function fetchProjectNames() {
+    async function fetchProjectNamesUpdate() {
         try {
             const response = await axios.get("/projects/list");
 
             if (response.status === 200) {
-                const projects = response.data.data;
+                const projectsName = response.data.data;
 
-                if (Array.isArray(projects)) {
+                if (Array.isArray(projectsName)) {
                     const selectElement = document.getElementById('taskProjectNameUpdate');
                     selectElement.innerHTML = '<option value="">Select project name</option>';
 
-                    projects.forEach(project => {
+                    projectsName.forEach(projects => {
                         const option = document.createElement('option');
-                        option.value = project.id;
-                        option.textContent = project.projectName;
+                        option.value = projects.id;
+                        option.textContent = projects.projectName;
                         selectElement.appendChild(option);
                     });
                 } else {

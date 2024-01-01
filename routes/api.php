@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProjectDashboardController;
 
 use App\Http\Middleware\TokenVerificationMiddleware;
 
@@ -34,7 +35,10 @@ Route::view('/Profile', 'pages.dashboard.profile-page')->middleware([TokenVerifi
 
 
 
+
 //backend routes
+Route::get('/project/details', [ProjectDashboardController::class, 'index'])->middleware([TokenVerificationMiddleware::class]);
+
 Route::post("/userLogin", [UserController::class, 'userLogin']);
 Route::get("/userProfile", [UserController::class, 'userProfile'])->middleware([TokenVerificationMiddleware::class]);
 Route::put("/userProfile", [UserController::class, 'update'])->middleware([TokenVerificationMiddleware::class]);

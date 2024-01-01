@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel">Create Customer</h6>
+                <h6 class="modal-title" id="exampleModalLabel">Create Task</h6>
             </div>
             <div class="modal-body">
                 <form id="task-form">
@@ -13,6 +13,7 @@
                                 <input type="text" class="form-control mb-2" id="task-name">
 
                                 <label class="form-label">Project Name *</label>
+                                <!-- Change this line in your HTML -->
                                 <select type="text" class="form-control mb-2" id="task-project-name" onfocus="fetchProjectNames()">
                                     <option value="">Select project name</option>
                                 </select>
@@ -27,7 +28,7 @@
                                     <option value="Inactive">Inactive</option>
                                 </select>
 
-                                <input type="text" class="form-control mb-2" value="1" id="task-user-id">
+                                <input type="hidden" class="form-control mb-2" value="" id="user_id">
 
                             </div>
                         </div>
@@ -45,37 +46,58 @@
 <script>
 
 
-async function fetchProjectNames() {
-    try {
-        const response = await axios.get("/projects/list");
+    async function fetchProjectNames() {
+        try {
+            const response = await axios.get("/projects/list");
 
-        if (response.status === 200) {
-            const projects = response.data.data;
+            if ('data' in response) {
+                const projects = response.data.data;
 
-            if (Array.isArray(projects)) {
-                const selectElement = document.getElementById('task-project-name');
-                selectElement.innerHTML = '<option value="">Select project name</option>';
+                if (Array.isArray(projects)) {
+                    const selectElement = document.getElementById('task-project-name');
+                    selectElement.innerHTML = '<option value="">Select project name</option>';
 
-                projects.forEach(project => {
-                    const option = document.createElement('option');
-                    option.value = project.id;
-                    option.textContent = project.projectName;
-                    selectElement.appendChild(option);
-                });
+                    projects.forEach(project => {
+                        const option = document.createElement('option');
+                        option.value = project.id;
+                        option.textContent = project.projectName;
+                        selectElement.appendChild(option);
+                    });
+                } else {
+                    console.error('Invalid response format. Expected an array.');
+                    alert("An error occurred while fetching project names.");
+                }
             } else {
-                console.error('Invalid response format. Expected an array.');
-                alert("An error occurred while fetching project names.");
+                console.error(`Failed to fetch project names. Status: ${response.status}`);
+                alert("Failed to fetch project names!");
             }
-        } else {
-            console.error(`Failed to fetch project names. Status: ${response.status}`);
-            alert("Failed to fetch project names!");
+        } catch (error) {
+            console.error('Error fetching project names:', error);
+            alert("An error occurred while fetching project names.");
         }
-    } catch (error) {
-        console.error('Error fetching project names:', error);
-        alert("An error occurred while fetching project names.");
     }
-}
 
+
+    async function fetchUserId() {
+        try {
+            const response = await axios.get("/userProfile");
+            if ('data' in response && 'id' in response.data) {
+                return response.data.id;
+            } else {
+                console.error('Failed to fetch user ID.');
+            }
+        } catch (error) {
+            console.error('Error fetching user ID:', error);
+        }
+    }
+
+    function setUserId() {
+        fetchUserId().then((userId) => {
+            document.getElementById('user_id').value = userId;
+        });
+    }
+
+    setUserId()
 
     async function saveTask() {
 
@@ -83,10 +105,9 @@ async function fetchProjectNames() {
         const TaskProjectName = document.getElementById('task-project-name').value;
         const TaskDescription = document.getElementById('task-description').value;
         const TaskStatus = document.getElementById('task-status').value;
-        const user_id = document.getElementById('task-user-id').value;
+        const TaskUserid = document.getElementById('user_id').value;
 
-        // console.log('TaskProjectName');
-        // Simple front-end validation
+
         if (!TasktName || !TaskProjectName || !TaskDescription || !TaskStatus) {
             alert("All fields are required!");
             return;
@@ -100,7 +121,7 @@ async function fetchProjectNames() {
                 taskName: TasktName,
                 project_id: TaskProjectName,
                 description: TaskDescription,
-                user_id: user_id,
+                user_id: TaskUserid,
                 status: TaskStatus
 
             });
@@ -118,4 +139,5 @@ async function fetchProjectNames() {
             hideLoader();
         }
     }
+    
 </script>

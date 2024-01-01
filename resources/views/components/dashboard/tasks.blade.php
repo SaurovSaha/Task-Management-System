@@ -43,7 +43,7 @@
                 <table class="table" id="tableData">
                     <thead>
                         <tr class="bg-light">
-                            <th>SL</th>
+                            <th>ID</th>
                             <th>Project Name</th>
                             <th>Task Name</th>
                             <th>Description</th>
