@@ -25,16 +25,13 @@ class JWTHelper
     }
 
     public static function DecodeToken($token){
-
         try{
-
-            if($token==='null'){
+            if( $token === null ){
                 return "unsuthorized";
             }else{
                 $key="123-xyz-abc";
                 return JWT::decode($token, new Key($key,'HS256'));
             }
-
 
         }catch(Exception $exception){
 

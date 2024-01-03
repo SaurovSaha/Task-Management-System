@@ -40,6 +40,7 @@ Route::view('/Profile', 'pages.dashboard.profile-page')->middleware([TokenVerifi
 Route::get('/project/details', [ProjectDashboardController::class, 'index'])->middleware([TokenVerificationMiddleware::class]);
 
 Route::post("/userLogin", [UserController::class, 'userLogin']);
+Route::post("/userRegistration", [UserController::class, 'userRegistration']);
 Route::get("/userProfile", [UserController::class, 'userProfile'])->middleware([TokenVerificationMiddleware::class]);
 Route::put("/userProfile", [UserController::class, 'update'])->middleware([TokenVerificationMiddleware::class]);
 Route::get("/userLogout", [UserController::class, 'userLogout'])->middleware([TokenVerificationMiddleware::class]);

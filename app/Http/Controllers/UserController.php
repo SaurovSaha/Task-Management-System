@@ -12,7 +12,7 @@ use PhpParser\Node\Stmt\Catch_;
 
 class UserController extends Controller
 {
-    function userRegistation(Request $request){
+    function userRegistration(Request $request){
 
         try{
             User::create($request->input());
